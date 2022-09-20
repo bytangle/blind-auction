@@ -39,7 +39,24 @@ contract BlindAuction {
     /// @dev auctionId => array of Bids
     mapping(bytes32 => Bid[]) private _bids;
 
-    bytes32[] private _auctionIds; // store the ids to able to easily query auctions and bids
+    /// @dev auctionId => address of highest bidder
+    mapping(bytes32 => address) private _highestBidder;
+
+    bytes32[] private _auctionIds; /// store the ids to able to easily query auctions and bids
+
+    /// @dev emits when a phase changes
+    /// @param auctionId bytes32 id of auction
+    /// @param phase new phase
+    /// @param msg the description of the new phase
+    event PhaseChanged(bytes32 auctionId, Phase phase, string msg);
+
+    /// @dev emits when a new auction is registered
+    /// @param auctionId generated auction ID
+    event AuctionRegistration(bytes32 auctionId);
+
+    /// @dev emits when a new bid is placed
+    /// @param bidder address of the bidder
+    event NewBid(address bidder);
 
     /// @dev used with revert when a non-beneficiary of an auction is trying to claim the auction's bid
     error NotABeneficiary();
