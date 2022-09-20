@@ -78,6 +78,11 @@ contract BlindAuction {
     /// @param currentPhase the current phase
     error PhaseNotStarted(Phase currentPhase);
 
+    /// @dev throws when invalid Bid details are provided when revailing bid
+    /// @param amount the provided amount
+    /// @param secret the provided password
+    error InvalidBidDetails(uint amount, bytes32 secret);
+
     /// @dev used with revert when trying to perform an action
     /// which can only be perform during a phase that has already ended
     /// @param currentPhase the current phase
@@ -215,6 +220,8 @@ contract BlindAuction {
 
                 // refund excess if highest bidder or everything if not the highest bidder
                 payable(msg.sender).transfer(refund);
+            } else {
+                revert InvalidBidDetails(amount, secret); // throw on wrong details
             }
 
     }
