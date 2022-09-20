@@ -120,8 +120,7 @@ contract BlindAuction {
     }
 
     /// @notice register new auction
-    /// @param minDeposit the minimum amount to bid
-    function newAuction(uint256 minDeposit) public {
+    function newAuction() public {
         bytes32 auctionId = keccak256(abi.encodePacked(msg.sender, block.timestamp));
 
         /// create action info
