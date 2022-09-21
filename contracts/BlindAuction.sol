@@ -70,6 +70,9 @@ contract BlindAuction {
     /// @param amount amount withdrawn
     event Withdrawal(address indexed bidder, uint amount);
 
+    /// @dev emit when auction has be ended by the beneficiary
+    event AuctionEnded(HighestBid indexed highestBid);
+
     /// @dev used with revert when a non-beneficiary of an auction is trying to claim the auction's bid
     error NotABeneficiary();
 
@@ -89,7 +92,7 @@ contract BlindAuction {
     error PhaseEnded(Phase currentPhase);
 
     /// @dev used when trying to move to next phase
-    error AuctionEnded();
+    error PhasesAlreadyExhausted();
 
     /// @dev used with revert when a wrong auction id is provided
     error AuctionDoesNotExistOrHasEnded();
@@ -151,7 +154,7 @@ contract BlindAuction {
         uint nxtPhase = uint(auction_.phase) + 1; // compute next phase
 
         /// get the max value of the enum, convert it to uint and ensure `nxtPhase` isn't greater than it
-        if(uint(type(Phase).max) < nxtPhase) revert AuctionEnded();
+        if(uint(type(Phase).max) < nxtPhase) revert PhasesAlreadyExhausted();
 
         auction_.phase = Phase(nxtPhase); // update Phase
 
@@ -279,5 +282,7 @@ contract BlindAuction {
             HighestBid memory highestBid_ = _highestBids[auctionId];
 
             payable(msg.sender).transfer(highestBid_.amount); // transfer amount to beneficiary
+
+            emit AuctionEnded(_highestBids[auctionId]); // emit event
     }
 }   
