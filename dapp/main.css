@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.flex {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+header {
+    padding: .5em;
+    background-color: coral;
+    justify-content: space-between;
+}
+
+
+header p {
+    font-size: 1.9em;
+    color: rgba(255, 255, 255, 0.857);
+    font-weight: bolder;
+    font-family: 'Dosis', 'Nabla', 'Satisfy', cursive;
+}
+
+button.btn {
+    border : none;
+    padding : .6em 1.8em;
+    border-radius: .5em;
+    background-color: yellowgreen;
+    font-family: "Dosis";
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    padding: 2em;
+}
+
+main section.sub-header {
+    border-bottom: 1px solid gray;
+    justify-content: space-between;
+}
+
+main section.sub-header p {
+    color: rgba(22, 69, 58, 0.857);
+    font-size: 2em;
+    font-family: "Satisfy";
+}
+
+section.auction-detail {
+    padding: 1em;
+    margin: .5em;
+    background-color: tomato;
+    border-radius: .3em;
+}
+
+section.auction-detail p {
+    font-family: "Dosis";
+    font-family: 1.5em;
+    justify-content: space-between;
+    margin: .9em;
+}
+
+section.auction-detail p span.t {
+    color: rgba(255, 255, 255, 0.734);
+    margin-right: .8em;
+}
+
+section.auction-detail p span.v {
+    color: white;
+}
